@@ -267,12 +267,26 @@ following:
       (readline-redisplay)
       (end-atomic))))]}
 
+@section{Changing the @|Readline| Library}
 
-@section[#:tag "readline-license"]{License Issues}
+@defmodule[readline/set-library]
 
-GNU's @|readline| library is covered by the GPL, and that applies to
-code that links with it.  Racket is licensed with the LGPL, so the
-@|readline| code is not used by default; you should explicitly enable
-it if you want to.  Also, be aware that if you write code that uses
-this library, it will make your code link to the @|readline| library
-when invoked, with the usual GPL implications.
+By default, the @filepath{readline} collection uses the Editline Library.
+This collection allows you to change which library @filepath{readline} uses.
+
+@defparam[current-readline-library lib ffi-lib?]{
+Returns the current readline library.
+}
+
+For example, to use GNU's Readline instead of Editline Library in the
+@racket[read-eval-print-loop],
+add to the result of (find-system-path 'init-file),
+which is "~/.racketrc" on Unix:
+
+@racketblock[
+(require readline/set-library
+         ffi/unsafe)
+(current-readline-library (ffi-lib "libreadline" '("5" "6" "4" "")))
+(require readline)
+]
+
