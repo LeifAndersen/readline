@@ -4,7 +4,8 @@
 
 ;; For example, to use libreadline in .racketrc:
 ;;
-;; (require readline/set-library)
+;; (require readline/set-library
+;;          ffi/unsafe)
 ;; (current-readline-library (ffi-lib "libreadline" '("5" "6" "4" "")))
 ;; (require readline)
 
